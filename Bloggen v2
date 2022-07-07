@@ -1,0 +1,79 @@
+List<string[]> blogPost = new List<string[]>();
+//Här skapar vi listan som kommer innehålla alla blogginlägg användaren skapar
+
+bool huvudMeny = true;
+//Här gör vi en true bool för att kunna stänga programmet om användaren klickar på 4.
+
+while (huvudMeny)
+{
+    Console.WriteLine("Hi and Welcome to Lunarstorm2");
+    Console.WriteLine("What do you want to do?");
+
+    Console.WriteLine("[1] Make a new post");
+    Console.WriteLine("[2] Show all posts");
+    Console.WriteLine("[3] Search for a post");
+    Console.WriteLine("[4] Close and exit");
+    //Här skriver vi menyn som användaren möts av.
+    int choice;
+    int.TryParse(Console.ReadLine(), out choice);
+    //Vi använder TryParse för att programmet inte ska krascha om man skriver nåt annat än angivna siffror.
+    Console.Clear();
+    //Jag använder även Console.Clear för att det inte ska vara för mycket text i terminalen.
+    switch (choice)
+    {
+        case 1:
+            Console.WriteLine("Write your title");
+            string lsTitle = Console.ReadLine();
+            string lowerlsTitle = lsTitle.ToLower();
+            Console.WriteLine("Write your post here ↓");
+            string lspost = Console.ReadLine();
+            var Date1 = DateTime.Now;
+            string[] onepost = {lowerlsTitle, lspost.ToString(), Date1.ToString()};
+            //Här sparar jag blogginläggets titel, text och tid separat som jag sedan kombinerar till en string som sparas i våran array.
+            //Jag använder även funktionen "ToLower" för att få all text i småbokstäver så det förenklar sökfunktionen.
+
+            if (lsTitle != "" && lspost != "")
+            //Här skriver jag en if sats ifall använderan skulle glöma att skriva en titel eller ett inlägg. Om dom glömmer får de en påminnelse enligt "else" satsen nedan.
+            {
+                blogPost.Add(onepost);
+
+                Console.WriteLine("Saving " + onepost[0]);
+            }
+            else
+            {
+                Console.WriteLine("The title and/or text can not be empty");
+            }
+            break;
+
+        case 2:
+            //här gör jag en foreach loop som skriver ut varje separat sparat innehåll i listan.
+            Console.Clear();
+            foreach(var item[0] in blogPost)
+            {
+                Console.WriteLine(item[0]);
+            }
+            break;
+        case 3:
+            //Här har jag gjort en linjär sökning för blogginläggen.
+            Console.WriteLine("What is the title of the post? ");
+            string search = Console.ReadLine();
+            for (int i = 0; i < blogPost.Count; i++)
+            {
+                if (blogPost[i][0] == search)
+                {
+                    Console.WriteLine("Found! " + blogPost[i][0]);
+                }
+
+            }
+
+            break;
+
+        case 4:
+
+            Console.WriteLine("Thank you and Goodbye!");
+            huvudMeny = false;
+            break;
+
+    }
+
+}
