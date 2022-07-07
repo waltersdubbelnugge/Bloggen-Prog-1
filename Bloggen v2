@@ -48,7 +48,7 @@ while (huvudMeny)
         case 2:
             //här gör jag en foreach loop som skriver ut varje separat sparat innehåll i listan.
             Console.Clear();
-            foreach(var item[0] in blogPost)
+            foreach(var item in blogPost)
             {
                 Console.WriteLine(item[0]);
             }
